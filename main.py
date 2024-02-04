@@ -2438,10 +2438,15 @@ def victortree2(winnernumber,vicd):
 
 def victortree3(winnernumber,vicd,stack={}):
     z = winnernumber
-    print(z)
+    stack[z] = {}
+    q = stack[z]
     while z in vicd:
-        z = list(vicd[z])[0]
-        print(z)
+        zlist = list(vicd[z])
+        z = zlist[0]
+        q[z] = {}
+        q = q[z]
+        print(b[z])
+    print(stack)
 
 
 
