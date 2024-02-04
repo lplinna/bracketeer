@@ -2429,8 +2429,12 @@ def linear_victortree(winnernumber,final):
 def victortree2(winnernumber,vicd):
     plimbus = list(vicd[winnernumber])
     print(plimbus)
-    plimbus = list(map(lambda x: list(vicd[x]) if x in vicd else "?",plimbus))
-    print(plimbus)
+    for i in range(16):
+        plimbus = list(map(lambda x: list(vicd[x]) if x in vicd else "?",plimbus))
+        plimbus = [item for sublist in plimbus for item in sublist]
+        print("quarkus\nquarkus")
+        print(len(plimbus))
+        print(plimbus)
 
 
 
