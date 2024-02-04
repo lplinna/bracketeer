@@ -2437,21 +2437,11 @@ def victortree2(winnernumber,vicd):
         print(plimbus)
 
 def victortree3(winnernumber,vicd,stack={}):
-    stack[winnernumber] = {}
-    def reach(number):
-        a = list(vicd[number]) if number in vicd else '?'
-        return a
-    shlub = reach(winnernumber)
-    for num in shlub:
-        stack[winnernumber][num] = reach(num)
-    
-    z = stack[winnernumber]
-    while 
-
-    print(stack)
-
-
-
+    z = winnernumber
+    print(z)
+    while z in vicd:
+        z = list(vicd[z])[0]
+        print(z)
 
 
 
