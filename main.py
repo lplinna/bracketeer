@@ -2436,6 +2436,20 @@ def victortree2(winnernumber,vicd):
         print(len(plimbus))
         print(plimbus)
 
+def victortree3(winnernumber,vicd,stack={}):
+    stack[winnernumber] = {}
+    def reach(number):
+        a = list(vicd[number]) if number in vicd else '?'
+        return a
+    shlub = reach(winnernumber)
+    for num in shlub:
+        stack[winnernumber][num] = reach(num)
+    
+    z = stack[winnernumber]
+    while 
+
+    print(stack)
+
 
 
 
@@ -2546,7 +2560,7 @@ while True:
             index_in_winbracket = [index for index, value in enumerate(win_bracket) if value == small_winner]
             losers = [value for index,value in enumerate(lost_bracket) if index in index_in_winbracket]
             tree_of_victors[small_winner] = reversed(losers)
-        victortree2(sorted_items[-1][0],tree_of_victors)
+        victortree3(sorted_items[-1][0],tree_of_victors)
 
 
     if chosen == "check":
