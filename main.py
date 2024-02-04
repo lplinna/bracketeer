@@ -2411,23 +2411,30 @@ b = a.splitlines()
 win_bracket = []
 lost_bracket = []
 
-search_range = range(0,len(b))
 
+working_range = list(range(0,len(b)))
+
+invalids = 0
 while True:
-    #choice_one = random.randrange(0,len(b))
-    #choice_two = random.randrange(0,len(b))
-    choice_one = random.choice(search_range)
-    choice_two = random.choice(search_range)
-    if choice_one in lost_bracket or choice_two in lost_bracket or choice_two == choice_one:
-        #print("bleh")
-        continue
+    if len(working_range) > 1:
+        choice_one = random.choice(working_range)
+        choice_two = random.choice(working_range)
+        while choice_one == choice_two:
+            choice_two = random.choice(working_range)
     print(f"Choose between {b[choice_one]}\n and \n {b[choice_two]}")
     chosen = input("1 or 2: ")
     if chosen in ["1","2"]:
         loser = choice_two if chosen == "1" else choice_one
         winner = choice_one if chosen == "1" else choice_two
-        lost_bracket.append(loser)
-        win_bracket.append(winner)
+        if loser in working_range:
+            lost_bracket.append(loser)
+            win_bracket.append(winner)
+            working_range.remove(loser)
+    else:
+        print("end reached")
+
+
+
     if chosen == "load":
         oget = open("input.txt")
         get = oget.read().splitlines()
@@ -2435,6 +2442,8 @@ while True:
         win_bracket = get[1].replace("[","").replace("]","").replace(",","").split(" ")
         lost_bracket = list(map(lambda x: int(x),lost_bracket))
         win_bracket = list(map(lambda x: int(x), win_bracket))
+        for number in lost_bracket:
+            working_range.remove(number)
         oget.close()
     if chosen == "cycle":
         load = open("output.txt")
@@ -2471,10 +2480,15 @@ while True:
             put = open("breakdown.txt",'w')
             put.write(statement)
             put.close()
+    if chosen == "check":
+        results = {i:lost_bracket.count(i) for i in lost_bracket}
+        sorted_items = sorted(results.items(), key=lambda x: x[1])
+        for item in sorted_items:
+            print(f"{item[1]} -> {b[item[0]]}")
 
     if chosen == "print":
         number = input("")
         print(b[int(number)])
     #print(f"Projected to crash in {len(b)-1-len(win_bracket)}")
-    print(f"Projected to crash in {len(search_range)-1-len(win_bracket)}")
+    print(f"Projected to crash in {len(working_range)}")
 
