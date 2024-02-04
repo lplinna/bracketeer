@@ -2405,6 +2405,8 @@ MOSSBACK - STRIGOI (feat. KAMAARA & Witchouse 40k)
 MOSSBACK - Formaldehyde
 """
 
+# Notes - it starts to get quite difficult at around 720.
+
 b = a.splitlines()
 win_bracket = []
 lost_bracket = []
@@ -2417,6 +2419,7 @@ while True:
     choice_one = random.choice(search_range)
     choice_two = random.choice(search_range)
     if choice_one in lost_bracket or choice_two in lost_bracket or choice_two == choice_one:
+        #print("bleh")
         continue
     print(f"Choose between {b[choice_one]}\n and \n {b[choice_two]}")
     chosen = input("1 or 2: ")
@@ -2448,6 +2451,27 @@ while True:
         print(lost_bracket)
         print(win_bracket)
         pause = input("continue?")
+    if chosen == "breakdown":
+        results = {i:win_bracket.count(i) for i in win_bracket}
+        cutoff = input("Cutoff: ")
+        for key,value in results.items():
+            if value > int(cutoff):
+               print(f"{value} -> {b[key]}")
+    if chosen == "breakdown2":
+        results = {i:win_bracket.count(i) for i in win_bracket}
+        cutoff = input("Cutoff: ")
+        sorted_items = sorted(results.items(), key=lambda x: x[1])
+        statement = ""
+        for item in sorted_items:
+            if item[1] > int(cutoff):
+                statement += f"{item[1]} -> {b[item[0]]}\n"
+        print(statement)
+        willsave = input("save? Y:N")
+        if willsave.lower() == "y":
+            put = open("breakdown.txt",'w')
+            put.write(statement)
+            put.close()
+
     if chosen == "print":
         number = input("")
         print(b[int(number)])
