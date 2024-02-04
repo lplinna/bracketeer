@@ -2417,6 +2417,20 @@ end = len(b)
 
 working_range = list(range(start,end))
 
+
+
+
+def linear_victortree(winnernumber,final):
+    final.append(f"--{b[winnernumber]}--\n")
+    for index,loser in enumerate(tree_of_victors[winnernumber]):
+        final.append((index * ' ') + b[loser]  + "\n")
+    
+
+
+
+
+
+
 while True:
     chosen = input("1 or 2: ")
     if len(working_range) > 1:
@@ -2486,6 +2500,33 @@ while True:
             with open("breakdown.txt",'w',encoding='utf-8') as put:
                 put.write(statement)
                 put.close()
+
+    if chosen == "breakdown3":
+        num_wins = {i:win_bracket.count(i) for i in win_bracket}
+        sorted_items = sorted(num_wins.items(), key=lambda x: x[1])
+
+        tree_of_victors = {}
+        for small_winner in win_bracket:
+            index_in_winbracket = [index for index, value in enumerate(win_bracket) if value == small_winner]
+            losers = [value for index,value in enumerate(lost_bracket) if index in index_in_winbracket]
+            tree_of_victors[small_winner] = reversed(losers)
+            
+        offset = int(input("Enter starting offset:"))
+        offset2 = int(input("Enter ending offset:"))
+
+        
+        with open("breakdown.txt",'w',encoding='utf-8') as put:
+            final = []
+            if offset == offset2:
+                linear_victortree(sorted_items[-offset][0],final)
+            else:
+                for i in range(offset,offset2):
+                    linear_victortree(sorted_items[-i][0],final)
+            print(''.join(final))
+            put.write(''.join(final))
+            put.close()
+
+
     if chosen == "check":
         results = {i:lost_bracket.count(i) for i in lost_bracket}
         sorted_items = sorted(results.items(), key=lambda x: x[1])
