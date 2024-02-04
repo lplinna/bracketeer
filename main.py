@@ -2423,7 +2423,7 @@ working_range = list(range(start,end))
 def linear_victortree(winnernumber,final):
     final.append(f"--{b[winnernumber]}--\n")
     for index,loser in enumerate(tree_of_victors[winnernumber]):
-        final.append((index * ' ') + b[loser]  + "\n")
+        final.append(((index+1) * ' ') + b[loser]  + "\n")
     
 
 
