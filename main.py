@@ -1,4 +1,5 @@
 import random
+import subprocess
 
 a = """
 Queen – Bohemian Rhapsody (Official Video Remastered)
@@ -2417,13 +2418,13 @@ end = len(b)
 working_range = list(range(start,end))
 
 while True:
+    chosen = input("1 or 2: ")
     if len(working_range) > 1:
         choice_one = random.choice(working_range)
         choice_two = random.choice(working_range)
         while choice_one == choice_two:
             choice_two = random.choice(working_range)
         print(f"Choose between {b[choice_one]}\n and \n {b[choice_two]}")
-        chosen = input("1 or 2: ")
         if chosen in ["1","2"]:
             loser = choice_two if chosen == "1" else choice_one
             winner = choice_one if chosen == "1" else choice_two
@@ -2476,15 +2477,15 @@ while True:
         cutoff = input("Cutoff: ")
         sorted_items = sorted(results.items(), key=lambda x: x[1])
         statement = ""
+        willsave = input("save? Y:N").lower() == "y"
         for item in sorted_items:
             if item[1] > int(cutoff):
-                statement += f"{item[1]} -> {b[item[0]]}\n"
-        print(statement)
-        willsave = input("save? Y:N")
-        if willsave.lower() == "y":
-            put = open("breakdown.txt",'w')
-            put.write(statement)
-            put.close()
+                line = f"{item[1]} -> {b[item[0]]}\n"
+                statement += line
+        if willsave:
+            with open("breakdown.txt",'w',encoding='utf-8') as put:
+                put.write(statement)
+                put.close()
     if chosen == "check":
         results = {i:lost_bracket.count(i) for i in lost_bracket}
         sorted_items = sorted(results.items(), key=lambda x: x[1])
