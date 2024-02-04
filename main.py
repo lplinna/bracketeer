@@ -2411,39 +2411,44 @@ b = a.splitlines()
 win_bracket = []
 lost_bracket = []
 
+start = 0
+end = len(b)
 
-working_range = list(range(0,len(b)))
+working_range = list(range(start,end))
 
-invalids = 0
 while True:
     if len(working_range) > 1:
         choice_one = random.choice(working_range)
         choice_two = random.choice(working_range)
         while choice_one == choice_two:
             choice_two = random.choice(working_range)
-    print(f"Choose between {b[choice_one]}\n and \n {b[choice_two]}")
-    chosen = input("1 or 2: ")
-    if chosen in ["1","2"]:
-        loser = choice_two if chosen == "1" else choice_one
-        winner = choice_one if chosen == "1" else choice_two
-        if loser in working_range:
-            lost_bracket.append(loser)
-            win_bracket.append(winner)
-            working_range.remove(loser)
+        print(f"Choose between {b[choice_one]}\n and \n {b[choice_two]}")
+        chosen = input("1 or 2: ")
+        if chosen in ["1","2"]:
+            loser = choice_two if chosen == "1" else choice_one
+            winner = choice_one if chosen == "1" else choice_two
+            if loser in working_range:
+                lost_bracket.append(loser)
+                win_bracket.append(winner)
+                working_range.remove(loser)
     else:
         print("end reached")
 
 
 
     if chosen == "load":
+        working_range = list(range(start,end))
         oget = open("input.txt")
         get = oget.read().splitlines()
         lost_bracket = get[0].replace("[","").replace("]","").replace(",","").split(" ")
         win_bracket = get[1].replace("[","").replace("]","").replace(",","").split(" ")
         lost_bracket = list(map(lambda x: int(x),lost_bracket))
         win_bracket = list(map(lambda x: int(x), win_bracket))
+        #print(lost_bracket)
+        #print(working_range)
         for number in lost_bracket:
             working_range.remove(number)
+        #print(working_range)
         oget.close()
     if chosen == "cycle":
         load = open("output.txt")
