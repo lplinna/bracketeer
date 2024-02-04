@@ -2426,6 +2426,13 @@ def linear_victortree(winnernumber,final):
         final.append(((index+1) * ' ') + b[loser]  + "\n")
     
 
+def victortree2(winnernumber,vicd):
+    plimbus = list(vicd[winnernumber])
+    print(plimbus)
+    plimbus = list(map(lambda x: list(vicd[x]) if x in vicd else "?",plimbus))
+    print(plimbus)
+
+
 
 
 
@@ -2501,6 +2508,7 @@ while True:
                 put.write(statement)
                 put.close()
 
+
     if chosen == "breakdown3":
         num_wins = {i:win_bracket.count(i) for i in win_bracket}
         sorted_items = sorted(num_wins.items(), key=lambda x: x[1])
@@ -2525,6 +2533,16 @@ while True:
             print(''.join(final))
             put.write(''.join(final))
             put.close()
+
+    if chosen == "breakdown4":
+        num_wins = {i:win_bracket.count(i) for i in win_bracket}
+        sorted_items = sorted(num_wins.items(), key=lambda x: x[1])
+        tree_of_victors = {}
+        for small_winner in win_bracket:
+            index_in_winbracket = [index for index, value in enumerate(win_bracket) if value == small_winner]
+            losers = [value for index,value in enumerate(lost_bracket) if index in index_in_winbracket]
+            tree_of_victors[small_winner] = reversed(losers)
+        victortree2(sorted_items[-1][0],tree_of_victors)
 
 
     if chosen == "check":
