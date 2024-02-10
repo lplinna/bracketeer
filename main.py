@@ -202,11 +202,13 @@ while True:
                 if value == steve:
                     thringus_stack.append(lost_bracket[tindex])
         storbo_stack.clear()
+        print("------")
         print(thringus_stack)
         for steve in thringus_stack:
             for tindex,value in enumerate(win_bracket):
                 if value == steve:
                     storbo_stack.append(lost_bracket[tindex])
+        print("------")
         print(storbo_stack)
         still_winners = True
         while(still_winners):
