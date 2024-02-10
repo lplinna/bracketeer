@@ -155,6 +155,15 @@ while True:
         victortree3(sorted_items[-1][0],tree_of_victors)
 
 
+    if chosen == "breakdown5":
+        num_wins = {i:win_bracket.count(i) for i in win_bracket}
+        top_hundy = []
+        for i in range(len(win_bracket)-1,0,-1):
+            if len(top_hundy) < 500 and not b[win_bracket[i]] in top_hundy:
+                print(f"{num_wins[win_bracket[i]]} -- {b[win_bracket[i]]}")
+                top_hundy.append(b[win_bracket[i]])
+
+
     if chosen == "check":
         results = {i:lost_bracket.count(i) for i in lost_bracket}
         sorted_items = sorted(results.items(), key=lambda x: x[1])
