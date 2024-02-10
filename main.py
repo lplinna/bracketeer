@@ -183,31 +183,10 @@ while True:
                 put.close()
     
     if chosen == "breakdown7":
-        thringus_stack = []
         storbo_stack = []
         for tindex,value in enumerate(win_bracket):
             if value == win_bracket[-1]:
-                thringus_stack.append(lost_bracket[tindex])
-        print("-------")
-        print(thringus_stack)
-        for steve in thringus_stack:
-            for tindex,value in enumerate(win_bracket):
-                if value == steve:
-                    storbo_stack.append(lost_bracket[tindex])
-        print("-------")
-        print(storbo_stack)
-        thringus_stack.clear()
-        for steve in storbo_stack:
-            for tindex,value in enumerate(win_bracket):
-                if value == steve:
-                    thringus_stack.append(lost_bracket[tindex])
-        storbo_stack.clear()
-        print("------")
-        print(thringus_stack)
-        for steve in thringus_stack:
-            for tindex,value in enumerate(win_bracket):
-                if value == steve:
-                    storbo_stack.append(lost_bracket[tindex])
+                storbo_stack.append(lost_bracket[tindex])
         print("------")
         print(storbo_stack)
         still_winners = True
