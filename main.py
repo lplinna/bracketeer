@@ -188,19 +188,24 @@ while True:
             if value == win_bracket[-1]:
                 storbo_stack.append(lost_bracket[tindex])
         print("------")
-        print(storbo_stack)
+        #print(storbo_stack)
+        print("||".join(list(map(lambda x: b[x], storbo_stack))))
         still_winners = True
         while(still_winners):
             tempo = storbo_stack.copy()
             storbo_stack.clear()
             still_winners = False
             for steve in tempo:
+                dropped = True
                 for tindex,value in enumerate(win_bracket):
                     if value == steve:
                         still_winners = True
+                        dropped = False
                         storbo_stack.append(lost_bracket[tindex])
+                
             print("-----")
-            print(storbo_stack)
+            #print(storbo_stack)
+            print("||".join(list(map(lambda x: b[x], storbo_stack))))
 
 
 
