@@ -162,6 +162,55 @@ while True:
             if len(top_hundy) < 500 and not b[win_bracket[i]] in top_hundy:
                 print(f"{num_wins[win_bracket[i]]} -- {b[win_bracket[i]]}")
                 top_hundy.append(b[win_bracket[i]])
+    
+    if chosen == "breakdown6":
+        num_wins = {i:win_bracket.count(i) for i in win_bracket}
+        num_wins_to_songs = {}
+        output = ""
+        for key,value in num_wins.items():
+            if not value in num_wins_to_songs:
+                num_wins_to_songs[value] = []
+            else:
+                num_wins_to_songs[value].append(key)
+        for i in range(max(num_wins_to_songs.keys()),0,-1):
+            if i in num_wins_to_songs:
+                the_songs = ""
+                for song in num_wins_to_songs[i]:
+                    the_songs += " | " + b[song] + " | "
+                output += f"{i} -- {the_songs}\n"
+        with open("breakdown.txt",'w',encoding='utf-8') as put:
+                put.write(output)
+                put.close()
+    
+    if chosen == "breakdown7":
+        thringus_stack = []
+        storbo_stack = []
+        for tindex,value in enumerate(win_bracket):
+            if value == win_bracket[-1]:
+                thringus_stack.append(lost_bracket[tindex])
+        print("-------")
+        print(thringus_stack)
+        for steve in thringus_stack:
+            for tindex,value in enumerate(win_bracket):
+                if value == steve:
+                    storbo_stack.append(lost_bracket[tindex])
+        print("-------")
+        print(storbo_stack)
+        thringus_stack.clear()
+        for steve in storbo_stack:
+            for tindex,value in enumerate(win_bracket):
+                if value == steve:
+                    thringus_stack.append(lost_bracket[tindex])
+        storbo_stack.clear()
+        print(thringus_stack)
+        for steve in thringus_stack:
+            for tindex,value in enumerate(win_bracket):
+                if value == steve:
+                    storbo_stack.append(lost_bracket[tindex])
+        print(storbo_stack)
+
+
+
 
 
     if chosen == "check":
