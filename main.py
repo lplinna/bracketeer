@@ -184,12 +184,12 @@ while True:
     
     if chosen == "breakdown7":
         storbo_stack = []
+        output = ""
         for tindex,value in enumerate(win_bracket):
             if value == win_bracket[-1]:
                 storbo_stack.append(lost_bracket[tindex])
-        print("------")
-        #print(storbo_stack)
-        print("||".join(list(map(lambda x: b[x], storbo_stack))))
+        output += ("\n//////\n")
+        output += ("||".join(list(map(lambda x: b[x], storbo_stack))))
         still_winners = True
         while(still_winners):
             tempo = storbo_stack.copy()
@@ -209,9 +209,12 @@ while True:
                 else:
                     stage_winners.append(steve)
                 
-            print("///////")
-            print("\n||".join(list(map(lambda x: b[x], stage_winners))))
-            print("\n--".join(list(map(lambda x: b[x], stage_dropped))))
+            output += ("\n///////\n")
+            output += ("\n||".join(list(map(lambda x: b[x], stage_winners))))
+            output += ("\n--".join(list(map(lambda x: b[x], stage_dropped))))
+        with open("breakdown.txt",'w',encoding='utf-8') as put:
+            put.write(output)
+            put.close()
 
 
 
