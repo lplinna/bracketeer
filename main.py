@@ -185,6 +185,7 @@ while True:
     if chosen == "breakdown7":
         storbo_stack = []
         output = ""
+        output += f"\n{b[win_bracket[-1]]}\n"
         for tindex,value in enumerate(win_bracket):
             if value == win_bracket[-1]:
                 storbo_stack.append(lost_bracket[tindex])
