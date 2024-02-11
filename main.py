@@ -8,7 +8,7 @@ with open("list.txt",'r',encoding='utf-8') as gets:
 win_bracket = []
 lost_bracket = []
 
-start = 0
+start = len(b)-100
 end = len(b)
 
 working_range = list(range(start,end))
@@ -190,7 +190,7 @@ while True:
             if value == win_bracket[-1]:
                 storbo_stack.append(lost_bracket[tindex])
         output += ("\n//////\n")
-        output += ("||".join(list(map(lambda x: b[x], storbo_stack))))
+        output += ("\n||".join(list(map(lambda x: b[x], storbo_stack))))
         still_winners = True
         while(still_winners):
             tempo = storbo_stack.copy()
