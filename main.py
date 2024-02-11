@@ -185,9 +185,14 @@ while True:
     if chosen == "breakdown7":
         storbo_stack = []
         output = ""
-        output += f"\n{b[win_bracket[-1]]}\n"
+        sevenstart = input("enter start: ")
+        if sevenstart == "":
+            sevenstart = -1
+        else:
+            sevenstart = int(sevenstart)
+        output += f"\n{b[win_bracket[sevenstart]]}\n"
         for tindex,value in enumerate(win_bracket):
-            if value == win_bracket[-1]:
+            if value == win_bracket[sevenstart]:
                 storbo_stack.append(lost_bracket[tindex])
         output += ("\n//////\n")
         output += ("\n||".join(list(map(lambda x: b[x], storbo_stack))))
