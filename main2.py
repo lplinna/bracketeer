@@ -11,8 +11,9 @@ def swap(i1,i2):
     b[i1], b[i2] = b[i2], b[i1]
 
 def heapify():
-    index1 = random.randint(0,len(b))
+    index1 = random.randint(0,len(b) - 1)
     parentindex = math.floor((index1 - 1) / 2)
+    parentindex = max(0,parentindex)
     print("child: ", b[index1])
     print("parent: ", b[parentindex])
     res = input("type 1 to swap parent with child")
