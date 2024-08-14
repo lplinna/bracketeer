@@ -3,7 +3,7 @@ import subprocess
 import math
 
 b = []
-with open("list_exp.txt",'r',encoding='utf-8') as gets:
+with open("breakdown.txt",'r',encoding='utf-8') as gets:
     b = gets.read().splitlines()
 
 
